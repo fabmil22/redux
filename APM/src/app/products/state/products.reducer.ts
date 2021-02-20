@@ -1,7 +1,7 @@
-import { ReducerManager } from "@ngrx/store";
+
 import * as AppState from '../../state/app.state'
 import { createReducer, on } from '@ngrx/store';
-import { showCode } from './counter.actions';
+import { showCode } from './product.actions';
 import { Product } from '../product';
 
 
@@ -14,15 +14,18 @@ export interface ProductState {
   products: Product[]
 }
 
+const initialState: ProductState = {
+  showProductCode: true,
+  currentProduct: null,
+  products: []
+};
 
-const _counterReducer = createReducer<ProductState>( {showProductCode : true} as ProductState,
-      on( showCode , (state): ProductState => ({ ...state,
-        showProductCode : !state.showProductCode
-
-      })),
-
+export const productReducer = createReducer<ProductState>(
+  initialState,
+  on(showCode , (state): ProductState => {
+    return {
+      ...state,
+      showProductCode: !state.showProductCode
+    };
+  })
 );
-
-export function counterReducer(state, action) {
-    return _counterReducer(state, action);
-}
