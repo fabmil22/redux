@@ -15,8 +15,8 @@ export interface ProductState {
 }
 
 
-const _counterReducer = createReducer( {showProductCode : true},
-      on( showCode , state => ({ ...state,
+const _counterReducer = createReducer<ProductState>( {showProductCode : true} as ProductState,
+      on( showCode , (state): ProductState => ({ ...state,
         showProductCode : !state.showProductCode
 
       })),
